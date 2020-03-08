@@ -40,7 +40,7 @@ openssl req -config openssl.cnf \
       -key 1_root/private/ca.key.pem \
       -passin pass:$2 \
       -new -x509 -days 7300 -sha256 -extensions v3_ca \
-      -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=$1" \
+      -subj "/C=CN/ST=Bryne/L=Beijing/O=Personal/CN=$1" \
       -out 1_root/certs/ca.cert.pem
 
 
@@ -66,7 +66,7 @@ echo ---
 mkdir -p 2_intermediate/csr
 openssl req -config openssl.cnf -new -sha256 \
       -passin pass:$2 \
-      -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=$1" \
+      -subj "/C=CN/ST=Bryne/L=Beijing/O=Personal/CN=$1" \
       -key 2_intermediate/private/intermediate.key.pem \
       -out 2_intermediate/csr/intermediate.csr.pem
 
@@ -122,7 +122,7 @@ echo Create the application signing request
 echo ---
 mkdir -p 3_application/csr
 openssl req -config intermediate_openssl.cnf \
-      -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=$1" \
+      -subj "/C=CN/ST=Bryne/L=Beijing/O=Personal/CN=$1" \
       -passin pass:$2 \
       -key 3_application/private/$1.key.pem \
       -new -sha256 -out 3_application/csr/$1.csr.pem
@@ -171,7 +171,7 @@ echo Generate the client signing request
 echo ---
 mkdir -p 4_client/csr
 openssl req -config intermediate_openssl.cnf \
-      -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=$1" \
+      -subj "/C=CN/ST=Bryne/L=Beijing/O=Personal/CN=$1" \
       -passin pass:$2 \
       -key 4_client/private/$1.key.pem \
       -new -sha256 -out 4_client/csr/$1.csr.pem
